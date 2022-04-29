@@ -27,13 +27,14 @@ namespace zyx
 		{
 			ZYX_LOG_ERROR(log1,"pthread create error!");
 		}
+		m_semaphore.wait(); //确保等thread的线程号初始化好再继续，否则可能出现无法获得线程号
 	}
 
 	Thread::~Thread()
 	{
 		if(m_thread)
 		{
-		pthread_detach(m_thread);
+			pthread_detach(m_thread);
 		}
 	}
 
@@ -54,7 +55,7 @@ namespace zyx
 		t_thread_name = thread->m_name;
 		thread->m_id = syscall(SYS_gettid);
 		pthread_setname_np(pthread_self(), thread->m_name.substr(0, 15).c_str());
-
+		thread->m_semaphore.post();//确保等thread的线程号初始化好再继续，否则可能出现无法获得线程号
 		thread->m_cb(thread->param);
 		return 0;
 	}

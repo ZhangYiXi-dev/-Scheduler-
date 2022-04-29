@@ -10,7 +10,7 @@ namespace zyx
     /**
     * @brief 信号量
     */
-   class Semaphore : Noncopyable
+   class Semaphore : public Noncopyable
    {
     public:
         /**

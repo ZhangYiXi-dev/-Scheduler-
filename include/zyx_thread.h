@@ -16,6 +16,7 @@
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include "noncopyable.h"
+#include "mutex.h"
 
 namespace zyx {
 
@@ -52,7 +53,8 @@ namespace zyx {
 		std::function<void(void*)> m_cb;
 		//回调函数参数
 		void* param;
-
+		/// 信号量
+    	Semaphore m_semaphore;
 	};
 }
 #endif 

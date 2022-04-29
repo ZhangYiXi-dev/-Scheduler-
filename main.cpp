@@ -27,14 +27,14 @@ void test_sch_1()
 
 int main()
 {
-   zyx::Scheduler::ptr sch(new zyx::Scheduler(6));
+   zyx::Scheduler::ptr sch(new zyx::Scheduler(6));//创建一个调度器，6为创建的线程个数
    for(int i=0;i<20;i++)
    {
        //zyx::Fiber::ptr f(new zyx::Fiber(test_sch_1));
        //sch->schedule(f);
-       sch->schedule(&test_sch_1);
+       sch->schedule(&test_sch_1);//向里面添加任务
    }
-   sch->start();
-   sch->stop();
+   sch->start();//开始执行任务
+   sch->stop();//停止
 
 }
